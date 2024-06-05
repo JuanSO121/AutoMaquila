@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class="text-2xl font-semibold">
+    {% if object.pk %}
+      Editar
+    {% else %}
+      Crear
+    {% endif %}
+    Orden de Pedido
+  </h2>
+  <form method="post" class="mt-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <h3 class="text-lg font-semibold">Lista de Pares</h3>
+    
+    {% for i in talla_range %}
+    <label for="id_talla_{{ i }}" class="block mt-2">Talla {{ i }}</label>
+    <input type="text" name="talla" value="{{ i }}" id="id_talla_{{ i }}" class="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring focus:border-purple-500">
+    <label for="id_pares_{{ i }}" class="block mt-2">Pares</label>
+    <input type="number" name="pares" id="id_pares_{{ i }}" class="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring focus:border-purple-500">
+    {% endfor %}
+
+    <button type="submit" class="mt-4 px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 focus:outline-none focus:ring focus:border-purple-500">Guardar</button>
+  </form>
+  <a href="{% url 'orden_pedido_list' %}" class="block mt-4 text-purple-600 hover:underline">Volver a la lista</a>
+{% endblock %}

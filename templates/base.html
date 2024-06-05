@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AutoMaquila{% endblock %}</title>
+    <!-- Incluye Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Vincula tu archivo CSS personalizado -->
+
+</head>
+<body class="bg-gray-900 text-white">
+    <header class="bg-purple-600 p-4">
+        <h1 class="text-center text-3xl font-semibold">AutoMaquila</h1>
+        <nav class="mt-4">
+            <ul class="flex justify-center space-x-4">
+                <li><a href="/" class="hover:text-purple-300">Inicio</a></li>
+                <li><a href="/ordenes/" class="hover:text-purple-300">Órdenes de Pedido</a></li>
+                <!-- Agrega más enlaces de navegación según sea necesario -->
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto mt-8">
+        {% block content %}
+        <!-- Contenido específico de cada página se insertará aquí -->
+        {% endblock %}
+    </main>
+
+    <footer class="bg-gray-800 text-center py-4">
+        <!-- Pie de página -->
+    </footer>
+
+    <!-- Incluye los scripts JS de Tailwind (al final del archivo) -->
+</body>
+</html>

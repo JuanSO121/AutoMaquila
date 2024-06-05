@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Detalle de Orden de Pedido</h2>
+  <p>Orden de Pedido: {{ object.orden_pedido }}</p>
+  <p>Cliente: {{ object.cliente }}</p>
+  <!-- Agrega otros campos según sea necesario -->
+  <a href="{% url 'orden_pedido_update' object.pk %}">Editar</a>
+  <a href="{% url 'orden_pedido_delete' object.pk %}">Eliminar</a>
+  <a href="{% url 'orden_pedido_list' %}">Volver a la lista</a>
+{% endblock %}
