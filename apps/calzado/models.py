@@ -6,4 +6,5 @@ class Calzado(models.Model):
     descripcion = models.TextField(blank=True)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
 
-
+    class Meta:
+        app_label = 'calzado'

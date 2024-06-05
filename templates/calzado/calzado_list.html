@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h2 class="text-2xl font-semibold mb-4">Lista de Calzados</h2>
+  <a href="{% url 'calzado_create' %}" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">Crear nuevo calzado</a>
+  <ul class="mt-4 w-full lg:w-3/4">
+    {% for calzado in calzados %}
+      <li class="bg-gray-800 p-4 rounded-lg mt-2 flex justify-between">
+        <span>{{ calzado.nombre }}</span>
+        <a href="{% url 'calzado_detail' calzado.pk %}" class="text-purple-500 hover:text-purple-700">Ver detalles</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

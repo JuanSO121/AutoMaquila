@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from .forms import LoginForm,RegisterForm
+from .forms import LoginForm,RegisterForm,PasswordResetRequestForm
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
@@ -12,7 +12,7 @@ from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 from django.contrib.auth import get_user_model,logout
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
-from .forms import PasswordResetRequestForm
+from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
 
@@ -25,10 +25,9 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')  # Asegúrate de que esto coincida con el nombre de la URL en urls.py
+                return redirect('index')  # Asegúrate de que esto coincida con el nombre de la URL en urls.py
             else:
                 form.add_error(None, 'Invalid login credentials')
-
     return render(request, 'login/login.html', {'form': form})
 
 def logout_view(request):
@@ -43,13 +42,14 @@ def register_view(request):
             user.set_password(form.cleaned_data['password'])
             user.save()
             login(request, user)
-            return redirect('home')
+            return redirect('index')
     else:
         form = RegisterForm()
     return render(request, 'login/registro.html', {'form': form})
 
+@login_required
 def home_view(request):
-    return render(request, 'home.html')
+    return render(request, 'index.html')
 
 def password_reset_request_view(request):
     if request.method == 'POST':
