@@ -1,11 +1,15 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h2>Registrar Movimiento de Inventario</h2>
-  <form method="post">
+  <h2 class="text-2xl font-semibold mb-4">Registrar Movimiento de Inventario</h2>
+
+  <form method="post" class="bg-gray-800 p-6 rounded-lg shadow-md mb-4">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Registrar</button>
+    <button type="submit" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+      Registrar
+    </button>
   </form>
-  <a href="{% url 'movimiento_inventario_list' %}">Volver a la lista</a>
+
+  <a href="{% url 'movimiento_inventario_list' %}" class="text-purple-500 hover:text-purple-700">Volver a la lista</a>
 {% endblock %}

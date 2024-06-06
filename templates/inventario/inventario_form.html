@@ -1,12 +1,15 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-  <h1>{% if form.instance.pk %}Editar Inventario{% else %}Crear Inventario{% endif %}</h1>
-  <a href="{% url 'bodega_create' %}">Crear Nueva Bodega</a>
-  <form method="post">
+  <h1 class="text-2xl font-semibold mb-4">{% if form.instance.pk %}Editar Inventario{% else %}Crear Inventario{% endif %}</h1>
+
+  
+
+  <form method="post" class="bg-gray-800 p-6 rounded-lg shadow-md">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Guardar</button>
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+      Guardar
+    </button>
   </form>
 {% endblock %}
-
