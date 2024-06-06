@@ -21,4 +21,3 @@ DATABASES = {
     }
 }
 ```
-ademas de crear super usuario llamado `admin` y password `admin` con el siguiente comando:
