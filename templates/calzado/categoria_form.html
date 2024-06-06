@@ -1,0 +1,11 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>{% if form.instance.pk %}Editar{% else %}Crear{% endif %} Categoría</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if form.instance.pk %}Actualizar{% else %}Crear{% endif %}</button>
+  </form>
+  <a href="{% url 'categoria_list' %}">Volver a la lista</a>
+{% endblock %}

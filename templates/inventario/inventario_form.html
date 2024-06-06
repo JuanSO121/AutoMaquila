@@ -1,0 +1,12 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h1>{% if form.instance.pk %}Editar Inventario{% else %}Crear Inventario{% endif %}</h1>
+  <a href="{% url 'bodega_create' %}">Crear Nueva Bodega</a>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+  </form>
+{% endblock %}
+

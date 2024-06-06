@@ -1,0 +1,15 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>Lista de Categorías</h2>
+  <a href="{% url 'categoria_create' %}">Crear nueva categoría</a>
+  <ul>
+    {% for categoria in categorias %}
+      <li>
+        {{ categoria.nombreCategoria }}
+        <a href="{% url 'categoria_update' categoria.pk %}">Editar</a>
+        <a href="{% url 'categoria_delete' categoria.pk %}">Eliminar</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

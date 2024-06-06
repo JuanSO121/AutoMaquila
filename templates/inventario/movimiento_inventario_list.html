@@ -1,0 +1,40 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <!-- Título de movimientos de inventario -->
+  <h2 class="text-2xl font-semibold mb-4">Lista de Movimientos de Inventario</h2>
+  
+  <!-- Enlace para registrar nuevo movimiento -->
+  <a href="{% url 'movimiento_inventario_create' %}" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 mb-4 inline-block">
+    Registrar nuevo movimiento
+  </a>
+  
+  <!-- Lista de movimientos -->
+  <div class="bg-gray-800 p-4 rounded-lg shadow-md">
+    <ul>
+      {% for movimiento in movimientos %}
+        <li class="bg-gray-900 p-4 rounded-lg mt-2">
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-lg font-medium">{{ movimiento.inventario }}</p>
+              <p class="text-sm text-gray-400">{{ movimiento.fecha|date:"d M Y, H:i" }}</p>
+            </div>
+            <div>
+              <span class="block text-sm">{{ movimiento.tipo|title }}</span>
+              {% if movimiento.tipo == 'entrada' %}
+                <span class="block text-lg font-semibold text-green-400">
+                  {{ movimiento.cantidad }}
+                </span>
+              {% else %}
+                <span class="block text-lg font-semibold text-red-400">
+                  {{ movimiento.cantidad }}
+                </span>
+              {% endif %}
+            </div>
+          </div>
+          <p class="text-sm text-gray-400 mt-2">{{ movimiento.descripcion }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
