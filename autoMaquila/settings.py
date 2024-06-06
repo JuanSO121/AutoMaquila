@@ -87,11 +87,11 @@ WSGI_APPLICATION = 'autoMaquila.wsgi.application'
 DATABASES = {
     'default': { 
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'LabIII',
-        'USER': 'postgres',
-        'PASSWORD': 'juanjo121',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': 'railway', # variable name PGDATABASE
+        'USER': 'postgres', # variable name PGUSER
+        'PASSWORD': 'sHhRMpFkckQeoGrLeobiKxWnYAwosVHi', # variable name PGPASSWORD
+        'HOST': 'roundhouse.proxy.rlwy.net', # variable name PGHOST
+        'PORT': '16828', # variable name PGPORT
     }
 }
 
