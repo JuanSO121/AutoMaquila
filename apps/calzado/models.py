@@ -5,7 +5,7 @@ class Calzado(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField(blank=True)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
-    rutaImagen = models.ImageField(upload_to='calzado_imagenes/', blank=True, null=True, default='calzado_imagenes/zapato.png')
+    rutaImagen = models.ImageField(upload_to = '../media/calzado_imagenes/', blank=True, null=True, default='../media/calzado_imagenes/zapato.png')###############
     
     def __str__(self):
         return f"{self.nombre} ({self.precio})"
