@@ -84,6 +84,7 @@ WSGI_APPLICATION = 'autoMaquila.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+#data base of railway
 DATABASES = {
     'default': { 
         'ENGINE': 'django.db.backends.postgresql',
