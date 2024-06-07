@@ -14,7 +14,7 @@ urlpatterns = [
     path('orders/', include('apps.orders.urls')),
     path('calzado/', include('calzado.urls')),
     path('inventario/', include('inventario.urls')),
-    path('gemini_app/', include('gemini_app.urls')),
+    path('gemini/', include('gemini_app.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

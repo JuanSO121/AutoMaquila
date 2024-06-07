@@ -2,11 +2,8 @@
 import google.generativeai as genai
 from PIL import Image
 import os
-from docx import Document
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
-from io import BytesIO
 from dotenv import load_dotenv
+import json
 
 load_dotenv()
 
@@ -25,39 +22,22 @@ class geminiApi:
         self.model = genai.GenerativeModel(model_name="gemini-pro")
         return self.model
     
-    def generate_user_story(self, file_path, description, file_type):
-        if file_type == 'image':
-            imagen = Image.open(file_path)
-            prompt = f"{description}, quiero que formules dos historias de usuario con el formato de como, quiero, para (no debe especificar la sintaxis)"
-            response = self.model.generate_content([prompt, imagen])
-        else:
-            return []
-
-        historias_usuario = response.text.split('\n')
-        return [historia.strip() for historia in historias_usuario if historia.strip()]
-
-def generate_word_document(historias_usuario):
-    doc = Document()
-    doc.add_heading('Historias de Usuario', 0)
-    for historia in historias_usuario:
-        doc.add_paragraph(historia)
-    byte_io = BytesIO()
-    doc.save(byte_io)
-    byte_io.seek(0)
-    return byte_io.getvalue()
-
-def generate_pdf_document(historias_usuario):
-    byte_io = BytesIO()
-    c = canvas.Canvas(byte_io, pagesize=letter)
-    width, height = letter
-    c.drawString(100, height - 40, "Historias de Usuario")
-    y = height - 60
-    for historia in historias_usuario:
-        c.drawString(100, y, historia)
-        y -= 20
-        if y < 40:
-            c.showPage()
-            y = height - 40
-    c.save()
-    byte_io.seek(0)
-    return byte_io.getvalue()
+    def extract_order_data(self, file_path):
+        """
+        Procesa una imagen de una hoja de pedidos y extrae los datos relevantes.
+        """
+        imagen = Image.open(file_path)
+        prompt = "Extrae los datos de los pedidos de esta imagen de hoja de pedidos. Devuélvelos en formato JSON con los campos: numero_pedido, bloque, tipo_servicio, fecha_pedido, fecha_entrega, cliente, referencia_calzado, lista_pares, total_pares."
+        
+        # Suponiendo que la API admite tanto texto como imágenes como entrada
+        response = self.model.generate_content([prompt, imagen])
+        
+        # Asumimos que la API devuelve un JSON con los datos relevantes
+        if response and response.text:
+            try:
+                order_data = json.loads(response.text)
+                return order_data
+            except json.JSONDecodeError:
+                print("No se pudo decodificar la respuesta como JSON.")
+                return None
+        return None
