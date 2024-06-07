@@ -1,11 +1,13 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h2 class="text-2xl font-semibold mb-4">Eliminar Calzado</h2>
-  <p>¿Estás seguro de que deseas eliminar "{{ calzado.nombre }}"?</p>
-  <form method="post" class="mt-4">
-    {% csrf_token %}
-    <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Sí, eliminar</button>
-    <a href="{% url 'calzado_list' %}" class="text-purple-500 hover:text-purple-700 ml-4">Cancelar</a>
-  </form>
+  <div class="container mx-auto px-4 py-6">
+    <h2 class="text-2xl font-semibold mb-4">Eliminar Calzado</h2>
+    <p class="text-white">¿Estás seguro de que deseas eliminar "{{ calzado.nombre }}"?</p>
+    <form method="post" class="mt-4">
+      {% csrf_token %}
+      <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Sí, eliminar</button>
+      <a href="{% url 'calzado_list' %}" class="text-purple-500 hover:text-purple-700 ml-4">Cancelar</a>
+    </form>
+  </div>
 {% endblock %}

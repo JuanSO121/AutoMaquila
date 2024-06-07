@@ -1,15 +1,17 @@
-{% extends 'base_generic.html' %}
+{% extends "base_generic.html" %}
 
 {% block content %}
-  <h2>Lista de Categorías</h2>
-  <a href="{% url 'categoria_create' %}">Crear nueva categoría</a>
-  <ul>
-    {% for categoria in categorias %}
-      <li>
-        {{ categoria.nombreCategoria }}
-        <a href="{% url 'categoria_update' categoria.pk %}">Editar</a>
-        <a href="{% url 'categoria_delete' categoria.pk %}">Eliminar</a>
-      </li>
-    {% endfor %}
-  </ul>
+  <div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-semibold mb-6">Lista de Categorías</h2>
+    <a href="{% url 'categoria_create' %}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Crear nueva categoría</a>
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {% for categoria in categorias %}
+        <div class="bg-gray-800 p-4 rounded-lg flex flex-col items-center">
+          <img src="{{ categoria.rutaImagen.url }}" alt="{{ categoria.nombreCategoria }}" class="w-32 h-32 object-cover rounded-full mb-4">
+          <h3 class="text-xl font-semibold text-white mb-2">{{ categoria.nombreCategoria }}</h3>
+          <a href="{% url 'categoria_detail' categoria.pk %}" class="text-purple-500 hover:text-purple-700">Ver detalles</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}

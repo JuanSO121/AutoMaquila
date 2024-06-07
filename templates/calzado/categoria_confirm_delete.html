@@ -1,11 +1,13 @@
-{% extends 'base_generic.html' %}
+{% extends "base_generic.html" %}
 
 {% block content %}
-  <h2>Eliminar Categoría</h2>
-  <p>¿Estás seguro de que deseas eliminar la categoría {{ categoria.nombreCategoria }}?</p>
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit">Eliminar</button>
-  </form>
-  <a href="{% url 'categoria_list' %}">Cancelar</a>
+  <div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-semibold mb-6">Eliminar Categoría</h2>
+    <p class="text-white mb-4">¿Estás seguro de que deseas eliminar la categoría "{{ categoria.nombreCategoria }}"?</p>
+    <form method="post" class="bg-gray-800 p-6 rounded-lg">
+      {% csrf_token %}
+      <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Eliminar</button>
+      <a href="{% url 'categoria_list' %}" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 ml-4">Cancelar</a>
+    </form>
+  </div>
 {% endblock %}
