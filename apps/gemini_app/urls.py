@@ -1,7 +1,8 @@
-# gemini_app/urls.py
+# apps/gemini_app/urls.py
+
 from django.urls import path
-from .views import UploadOrderView
+from . import views
 
 urlpatterns = [
-    path('', UploadOrderView.as_view(), name='upload_order'),
+    path('', views.gemini_view, name='gemini_upload'),
 ]

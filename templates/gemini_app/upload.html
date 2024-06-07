@@ -1,61 +1,21 @@
-<!-- templates/gemini_app/upload.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Subir Hoja de Pedidos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        input, button {
-            margin-bottom: 10px;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>Subir Imagen del Pedido</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Subir Hoja de Pedidos</h1>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Subir</button>
-        </form>
-    </div>
+    <h1>Subir Imagen del Pedido</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Subir</button>
+    </form>
+
+    {% if order_details %}
+        <h2>Detalles del Pedido:</h2>
+        <pre>{{ order_details }}</pre>
+    {% elif error %}
+        <p>{{ error }}</p>
+    {% endif %}
 </body>
 </html>
