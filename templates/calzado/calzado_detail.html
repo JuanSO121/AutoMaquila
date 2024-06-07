@@ -7,7 +7,7 @@
   <!-- Detalles del calzado -->
   <div class="bg-gray-800 p-6 rounded-lg shadow-md mb-6">
     <!-- Mostrar imagen si existe, de lo contrario, mostrar imagen predeterminada -->
-    <img src="{{ calzado.imagen.url }}" alt="{{ calzado.nombre }}" class="mb-4 w-full h-auto rounded-lg shadow">
+    <img src="{{ calzado.rutaImagen.url }}" alt="{{ calzado.nombre }}" style="max-width: 200px;"/>
     <p class="mb-2"><strong>Referencia:</strong> {{ calzado.referencia }}</p>
     <p class="mb-2"><strong>Descripción:</strong> {{ calzado.descripcion }}</p>
     <p class="mb-2"><strong>Precio:</strong> ${{ calzado.precio }}</p>
