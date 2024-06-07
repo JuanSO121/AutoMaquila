@@ -13,7 +13,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 
 import os
+from dotenv import load_dotenv
 import sys
+load_dotenv()
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,6 +30,9 @@ sys.path.insert(0,os.path.join(BASE_DIR, 'apps'))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-pi&nr%t@a-a**=4q05b(i@%$o+hsb!j8mqfb=bi%%=gzdea6%u'
 
+# Configuración de la API de Gemini
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -37,10 +44,10 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'calzado',
     'pedido',
-    'bodega',
     'inventario',
     'orders',
     'login',
+    'gemini_app',
     'apps.ordenes_app',
     'django.contrib.admin',
     'django.contrib.auth',
