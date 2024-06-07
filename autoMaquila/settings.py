@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'calzado',
     'pedido',
     'inventario',
-    'orders',
     'login',
     'gemini_app',
     'apps.ordenes_app',
