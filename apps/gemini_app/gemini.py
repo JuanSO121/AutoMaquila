@@ -52,9 +52,20 @@ class geminiApi:
                 # Si el JSON no es válido, intentar parsear manualmente.
                 order_details = self.parse_order_details(extracted_text)
             
+            # Verificar que todas las claves necesarias estén presentes en el resultado.
+            required_keys = ['numero_pedido', 'bloque', 'tipo_servicio', 'fecha_pedido', 'fecha_entrega', 'cliente', 'referencia_calzado', 'lista_pares', 'total_pares']
+            for key in required_keys:
+                if key not in order_details:
+                    order_details[key] = None  # O asigna un valor predeterminado adecuado
+            
+            # Verificar si la referencia_calzado está presente y asignar un valor predeterminado si es necesario.
+            if 'referencia_calzado' not in order_details or not order_details['referencia_calzado']:
+                order_details['referencia_calzado'] = 'default_referencia_calzado'  # Valor predeterminado para la referencia_calzado
+            
             return order_details
         else:
             raise ValueError("No se pudo extraer la información del pedido de la imagen.")
+
         
     def parse_order_details(self, text):
         """
