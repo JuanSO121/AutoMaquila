@@ -72,6 +72,6 @@ def gemini_view(request):
                 # Redirigir a la página de la lista de pedidos después de guardar el nuevo pedido.
                 return redirect('/pedido/')
             except Exception as e:
-                return JsonResponse({'error': str(e)}, status=500)
+                return redirect('/gemini/')
     
     return render(request, 'gemini_app/upload.html')
