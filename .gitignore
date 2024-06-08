@@ -1,3 +1,5 @@
 venv
 migrations
 __pycache__
+google_ocr.json
+.env

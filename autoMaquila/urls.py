@@ -11,9 +11,10 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
     path('admin/', admin.site.urls),
     path('login/', include('apps.login.urls')),
-    path('orders/', include('apps.orders.urls')),
     path('calzado/', include('calzado.urls')),
     path('inventario/', include('inventario.urls')),
+    path('gemini/', include('gemini_app.urls')),
+    path('pedido/', include('pedido.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class BodegaConfig(AppConfig):
+class GeminiAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'bodega'
+    name = 'gemini_app'

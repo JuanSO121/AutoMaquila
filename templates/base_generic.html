@@ -13,14 +13,26 @@
 
   <!-- Importación de fuentes -->
   <link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.0/css/boxicons.min.css" rel="stylesheet">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
   <style>
+    /* Estilos adicionales */
+    body {
+      background-color: #09090F;
+      color: #FFFFFF;
+    }
+
     .box-sizing-border {
       box-sizing: border-box;
     }
@@ -47,34 +59,47 @@
   <div class="flex flex-col items-center p-4 box-sizing-border w-full">
 
     <!-- Encabezado -->
-    <div class="flex flex-col items-center w-full p-4">
-      <div class="shadow-md rounded-3xl bg-[rgba(11,11,17,0.914)] mb-12 flex flex-row justify-between p-4 md:p-6 lg:w-3/4 w-full">
-        
-        <!-- Logo y título -->
-        <div class="flex flex-row items-center">
-          {% comment %} 
-          <div class="rounded-[10px] bg-[url('{{ url_for('static', filename='uploads/logo.png') }}')] bg-[50%_50%] bg-cover bg-no-repeat w-[101px] h-[94px] ml-4"></div>
-          {% endcomment %}
-          <div class="inline-block font-['Oleo_Script'] text-2xl md:text-3xl text-white">AutoMaquila</div>
-        </div>
-
-        <!-- Menú de navegación -->
-        <div class="flex flex-row justify-between items-center w-full max-w-lg">
-          <a href="/" class="break-words font-['Montserrat'] font-medium text-[18px] text-[#C1C1C1] bg-transparent border-none cursor-pointer focus:outline-none px-4 py-2 rounded hover:bg-purple-600 hover:text-white">Inicio</a>
-          <a href="{% url 'calzado_list' %}" class="break-words font-['Montserrat'] font-medium text-[18px] text-[#C1C1C1] bg-transparent border-none cursor-pointer focus:outline-none px-4 py-2 rounded hover:bg-purple-600 hover:text-white">Calzados</a>
-          <a href="{% url 'inventario_list' %}" class="break-words font-['Montserrat'] font-medium text-[18px] text-[#C1C1C1] bg-transparent border-none cursor-pointer focus:outline-none px-4 py-2 rounded hover:bg-purple-600 hover:text-white">Inventario</a>
-          <a href="{% url 'bodega_list' %}" class="break-words font-['Montserrat'] font-medium text-[18px] text-[#C1C1C1] bg-transparent border-none cursor-pointer focus:outline-none px-4 py-2 rounded hover:bg-purple-600 hover:text-white">Bodegas</a>
-          <a href="{% url 'movimiento_inventario_list' %}" class="break-words font-['Montserrat'] font-medium text-[18px] text-[#C1C1C1] bg-transparent border-none cursor-pointer focus:outline-none px-4 py-2 rounded hover:bg-purple-600 hover:text-white">Movimientos</a>
-        </div>
+    <header class="w-full bg-[rgba(11,11,17,0.914)] shadow-md rounded-3xl mb-12 p-4 md:p-6 lg:w-3/4 mx-auto">
+      <!-- Logo y título -->
+      <div class="flex items-center mb-4 md:mb-0">
+        <!-- Placeholder para el logo -->
+        <div class="rounded-[10px] bg-[url('{% static 'logo_maquila.png' %}')] bg-[50%_50%] bg-cover bg-no-repeat w-[151px] h-[94px] ml-4"></div>
+        <h1 class="font-['Oleo_Script'] text-2xl md:text-3xl text-white">AutoMaquila</h1>
       </div>
-    </div>
+    
+      <!-- Menú de navegación -->
+      <nav class="center center-wrap justify-center md:justify-end space-x-4">
+        <div class="flex flex-wrap justify-around md:justify-between w-full md:w-auto">
+          <a href="/" class="font-['Montserrat'] text-[18px] text-[#C1C1C1] px-4 py-2 rounded hover:bg-purple-600 hover:text-white">Inicio</a>
+          <a href="{% url 'calzado_list' %}" class="font-['Montserrat'] text-[18px] text-[#C1C1C1] px-4 py-2 rounded hover:bg-purple-600 hover:text-white">Calzados</a>
+          <a href="{% url 'categoria_list' %}" class="font-['Montserrat'] text-[18px] text-[#C1C1C1] px-4 py-2 rounded hover:bg-purple-600 hover:text-white">Categorías</a>
+          <a href="{% url 'inventario_list' %}" class="font-['Montserrat'] text-[18px] text-[#C1C1C1] px-4 py-2 rounded hover:bg-purple-600 hover:text-white">Inventario</a>
+          <a href="{% url 'bodega_list' %}" class="font-['Montserrat'] text-[18px] text-[#C1C1C1] px-4 py-2 rounded hover:bg-purple-600 hover:text-white">Bodegas</a>
+          <a href="{% url 'movimiento_inventario_list' %}" class="font-['Montserrat'] text-[18px] text-[#C1C1C1] px-4 py-2 rounded hover:bg-purple-600 hover:text-white">Movimientos</a>
+          <a href="{% url 'gemini_upload' %}" class="font-['Montserrat'] text-[18px] text-[#C1C1C1] px-4 py-2 rounded hover:bg-purple-600 hover:text-white">Auto Pedido</a>
+          <a href="{% url 'pedido_list' %}" class="font-['Montserrat'] text-[18px] text-[#C1C1C1] px-4 py-2 rounded hover:bg-purple-600 hover:text-white">Pedidos</a>
+          
+        </div>
+      </nav>
+    </header>
+    
 
     <!-- Contenido principal -->
-    <div class="flex flex-col items-center w-full box-sizing-border p-4">
+    <main class="w-full lg:w-3/4 mx-auto p-4 box-sizing-border">
       {% block content %}
       {% endblock %}
-    </div>
+    </main>
   </div>
+
+<!-- Inicialización de Flatpickr -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    flatpickr(".flatpickr", {
+      dateFormat: "F j, Y",
+    });
+  });
+</script>
+
 
 </body>
 </html>
