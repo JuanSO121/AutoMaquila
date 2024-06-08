@@ -1,14 +1,18 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h2 class="text-2xl font-semibold mb-4">Lista de Calzados</h2>
-  <a href="{% url 'calzado_create' %}" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">Crear nuevo calzado</a>
-  <ul class="mt-4 w-full lg:w-3/4">
-    {% for calzado in calzados %}
-      <li class="bg-gray-800 p-4 rounded-lg mt-2 flex justify-between">
-        <span>{{ calzado.nombre }}</span>
-        <a href="{% url 'calzado_detail' calzado.pk %}" class="text-purple-500 hover:text-purple-700">Ver detalles</a>
-      </li>
-    {% endfor %}
-  </ul>
+  <div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-semibold mb-6">Lista de Calzados</h2>
+    <a href="{% url 'calzado_create' %}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Crear nuevo calzado</a>
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {% for calzado in calzados %}
+        <div class="bg-gray-800 p-4 rounded-lg flex flex-col items-center">
+          <img src="{{ calzado.rutaImagen.url }}" alt="{{ calzado.nombre }}" class="w-32 h-32 object-cover rounded-full mb-4">
+          <h3 class="text-xl font-semibold text-white mb-2">{{ calzado.nombre }}</h3>
+          <p class="text-gray-400">{{ calzado.categoria.nombreCategoria }}</p>
+          <a href="{% url 'calzado_detail' calzado.pk %}" class="text-purple-500 hover:text-purple-700 mt-2">Ver detalles</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}

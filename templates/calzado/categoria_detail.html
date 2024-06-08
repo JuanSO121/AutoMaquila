@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-semibold mb-6">{{ categoria.nombreCategoria }}</h2>
+    <div class="flex flex-col sm:flex-row items-center sm:items-start mb-6">
+      <img src="{{ categoria.rutaImagen.url }}" alt="{{ categoria.nombreCategoria }}" class="w-48 h-48 object-cover rounded-full mb-4 sm:mr-6">
+      <div class="text-white">
+        <p class="mb-2"><strong>Descripción:</strong> {{ categoria.descripcion }}</p>
+        <a href="{% url 'categoria_update' categoria.pk %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Editar categoría</a>
+        <a href="{% url 'categoria_delete' categoria.pk %}" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 ml-4">Eliminar categoría</a>
+      </div>
+    </div>
+    <h3 class="text-2xl font-semibold mb-4">Calzados en esta categoría</h3>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {% for calzado in categoria.calzados.all %}
+        <li class="bg-gray-800 p-4 rounded-lg flex flex-col items-center">
+          <img src="{{ calzado.rutaImagen.url }}" alt="{{ calzado.nombre }}" class="w-32 h-32 object-cover rounded-full mb-4">
+          <h4 class="text-xl font-semibold text-white mb-2">{{ calzado.nombre }}</h4>
+          <p class="text-gray-400">{{ calzado.descripcion }}</p>
+          <a href="{% url 'calzado_detail' calzado.pk %}" class="text-purple-500 hover:text-purple-700 mt-2">Ver detalles</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
