@@ -14,6 +14,7 @@ urlpatterns = [
     path('calzado/', include('calzado.urls')),
     path('inventario/', include('inventario.urls')),
     path('gemini/', include('gemini_app.urls')),
+    path('pedido/', include('pedido.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
