@@ -1,5 +1,3 @@
-# apps/gemini_app/gemini.py
-
 import google.generativeai as genai
 from PIL import Image
 import os
@@ -60,7 +58,7 @@ class geminiApi:
             
             # Verificar si la referencia_calzado está presente y asignar un valor predeterminado si es necesario.
             if 'referencia_calzado' not in order_details or not order_details['referencia_calzado']:
-                order_details['referencia_calzado'] = 'default_referencia_calzado'  # Valor predeterminado para la referencia_calzado
+                order_details['referencia_calzado'] = 'PALM170'  # Valor predeterminado para la referencia_calzado
             
             return order_details
         else:

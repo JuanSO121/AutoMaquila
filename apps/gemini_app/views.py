@@ -26,18 +26,23 @@ def gemini_view(request):
                 # Verificar si todas las claves necesarias están presentes en order_details.
                 required_keys = ['numero_pedido', 'bloque', 'tipo_servicio', 'fecha_pedido', 'cliente', 'referencia_calzado', 'lista_pares', 'total_pares']
                 for key in required_keys:
-                    if key not in order_details:
+                    if key not in order_details or order_details[key] is None:
                         return JsonResponse({'error': f"Clave '{key}' faltante en los detalles del pedido."}, status=400)
 
-                # Verificar y asignar la fecha_entrega.
+                # Verificar y asignar la fecha_pedido y fecha_entrega.
+                try:
+                    fecha_pedido = datetime.strptime(order_details['fecha_pedido'], '%Y-%m-%d').date()
+                except (TypeError, ValueError):
+                    return JsonResponse({'error': "Formato de fecha_pedido inválido. Debe ser 'YYYY-MM-DD'."}, status=400)
+                
                 fecha_entrega_str = order_details.get('fecha_entrega')
                 if fecha_entrega_str:
                     try:
                         fecha_entrega = datetime.strptime(fecha_entrega_str, '%Y-%m-%d').date()
-                    except ValueError:
+                    except (TypeError, ValueError):
                         return JsonResponse({'error': "Formato de fecha_entrega inválido. Debe ser 'YYYY-MM-DD'."}, status=400)
                 else:
-                    fecha_entrega = '1970-01-01'  # Valor predeterminado en caso de ausencia
+                    fecha_entrega = datetime(1970, 1, 1).date()  # Valor predeterminado en caso de ausencia
 
                 # Verificar si ya existe un pedido con el mismo número de pedido.
                 numero_pedido = order_details['numero_pedido']
@@ -54,13 +59,13 @@ def gemini_view(request):
                     try:
                         calzado_referencia = Calzado.objects.get(referencia='PALM170')
                     except Calzado.DoesNotExist:
-                        return JsonResponse({'error': "Referencia de calzado no encontrada."}, status=404)
+                        return JsonResponse({'error': "Referencia de calzado predeterminada no encontrada."}, status=404)
 
                 nuevo_pedido = Pedido(
                     numero_pedido=numero_pedido,  # Usar el número de pedido modificado si es necesario.
                     bloque=order_details['bloque'],
                     tipo_servicio=order_details['tipo_servicio'],
-                    fecha_pedido=order_details['fecha_pedido'],
+                    fecha_pedido=fecha_pedido,
                     fecha_entrega=fecha_entrega,
                     cliente=order_details['cliente'],
                     referencia_calzado=calzado_referencia,
@@ -70,8 +75,8 @@ def gemini_view(request):
                 nuevo_pedido.save()
 
                 # Redirigir a la página de la lista de pedidos después de guardar el nuevo pedido.
-                return redirect('/pedido/')
+                return redirect(reverse('pedido_list'))
             except Exception as e:
-                return redirect('/gemini/')
+                return JsonResponse({'error': str(e)}, status=500)
     
     return render(request, 'gemini_app/upload.html')
