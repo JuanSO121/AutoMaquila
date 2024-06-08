@@ -20,6 +20,12 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
   <style>
     /* Estilos adicionales */
     body {
@@ -84,6 +90,16 @@
       {% endblock %}
     </main>
   </div>
+
+<!-- Inicialización de Flatpickr -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    flatpickr(".flatpickr", {
+      dateFormat: "F j, Y",
+    });
+  });
+</script>
+
 
 </body>
 </html>
