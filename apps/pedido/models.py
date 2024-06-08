@@ -1,5 +1,5 @@
 from django.db import models
-from calzado.models import Calzado  # Asegúrate de importar el modelo Calzado correctamente
+from calzado.models import Calzado  # Importa el modelo Calzado correctamente
 
 class Pedido(models.Model):
     numero_pedido = models.CharField(max_length=50, unique=True, default='N/A')

@@ -43,6 +43,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'calzado',
     'pedido',
+    'apps.pedido.templatetags',
     'inventario',
     'login',
     'gemini_app',
