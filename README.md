@@ -1,3 +1,8 @@
+Despliegue:
+https://automaquila.onrender.com
+
+Las imagenes de los pedidos para probar la funcionalidad de Auto Pedidos se ecnuentran en la carpeta media
+
 # Proyecto Django - Gestión de Inventario Virtual de Calzado
 
 # INDICE
