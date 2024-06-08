@@ -1,52 +1,50 @@
-<!-- templates/login/login.html -->
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="login-light"></div>
-    <div class="login-box">
-        <form method="post">
-            {% csrf_token %}
-            <input type="checkbox" class="input-check" id="input-check">
-            <label for="input-check" class="toggle">
-                <span class="text off">off</span>
-                <span class="text on">on</span>
-            </label>
-            <div class="light"></div>
 
-            <h2>Login</h2>
-            <div class="input-box">
-                <span class="icon">
-                    <ion-icon name="person"></ion-icon>
+<body class="bg-black text-white flex items-center justify-center h-screen">
+    <div class="bg-gray-900 w-full max-w-md rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-bold text-withe mb-4 text-center">Login</h2>
+        <form method="post" class="flex flex-col space-y-4">
+            {% csrf_token %}
+            <!-- Username Input -->
+            <div class="relative">
+                <input type="text" name="username" class="bg-[#09090F] text-[#FFFFFF] text-gray-900 border-0 rounded-md p-2 pl-10 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150 w-full" placeholder="Username">
+                <span class="absolute left-3 top-3 text-withe">
+                    <ion-icon name="person" class="text-xl"></ion-icon>
                 </span>
-                {{ form.username }}
-                <div class="input-line"></div>
             </div>
-            <div class="input-box">
-                <span class="icon">
-                    <ion-icon name="lock-closed"></ion-icon>
+
+            <!-- Password Input -->
+            <div class="relative">
+                <input type="password" name="password" class="bg-[#09090F] text-[#FFFFFF] text-gray-900 border-0 rounded-md p-2 pl-10 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150 w-full" placeholder="Password">
+                <span class="absolute left-3 top-3 text-gray-500">
+                    <ion-icon name="lock-closed" class="text-xl"></ion-icon>
                 </span>
-                {{ form.password }}
-                <div class="input-line"></div>
             </div>
-            <div class="remember-forgot">
-                <label><input type="checkbox"> Remember me</label>
-                <a href="{% url 'password_reset' %}">Forgot Password?</a>
-            </div>
-            <button type="submit">Login</button>
-            <div class="register-link">
-                <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
-            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="bg-gradient-to-r from-indigo-500 to-purple-900 text-white font-bold py-2 px-4 rounded-md hover:from-indigo-600 hover:to-blue-600 transition ease-in-out duration-150">
+                Login
+            </button>
+
+            <!-- Register Link -->
+            <p class="text-withe text-center mt-4">Don't have an account? <a href="{% url 'register' %}" class="text-purple-500 hover:underline">Signup</a></p>
+
+            <!-- Password Reset Link -->
+            <p class="text-withe text-center mt-4">Forgot your password? <a href="{% url 'password_reset' %}" class="text-purple-500 hover:underline">Reset it here</a></p>
+
+            <!-- Display Form Errors -->
             {% if form.errors %}
-                <div class="alert alert-danger">
+                <div class="bg-red-100 text-red-700 p-4 rounded-md">
                     {% for field in form %}
                         {% for error in field.errors %}
                             <p>{{ error }}</p>
@@ -60,7 +58,9 @@
         </form>
     </div>
 
+    <!-- Ionicons -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>
