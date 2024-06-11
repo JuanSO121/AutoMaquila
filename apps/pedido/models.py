@@ -13,7 +13,7 @@ class Pedido(models.Model):
     fecha_entrega = models.DateField(null=True, blank=True)
     cliente = models.CharField(max_length=100, default='Cliente Anónimo')
     referencia_calzado = models.ForeignKey(Calzado, on_delete=models.CASCADE, null=True, blank=True)  # Asegúrate de que la referencia a Calzado sea correcta
-    lista_pares = models.JSONField(default=dict)
+    lista_pares = models.TextField(default='[]')
     total_pares = models.IntegerField(default=0)
 
     def __str__(self):

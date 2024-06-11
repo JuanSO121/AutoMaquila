@@ -48,7 +48,10 @@
         {% for talla in talla_range %}
           <div>
             <label for="id_talla_{{ talla }}" class="block text-sm font-medium text-gray-300">Talla {{ talla }}</label>
-            <input type="number" name="talla_{{ talla }}" id="id_talla_{{ talla }}" value="{{ form.initial.talla_34 }}" class="block w-full mt-1 text-white rounded">
+            {% with field_name="talla_"|add:talla %}
+              {{ form[field_name].errors }}
+              {{ form[field_name]|add_class:"block w-full mt-1 text-white rounded" }}
+            {% endwith %}
           </div>
         {% endfor %}
       </div>
